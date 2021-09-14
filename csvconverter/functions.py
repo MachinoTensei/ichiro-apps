@@ -79,7 +79,14 @@ def process_file(data):
     #ReferenceNoをHandleに設定して、IDは空欄が推奨のため空欄にする。
     tcv_csv['Handle'] = tcv_csv['ID']
     tcv_csv['ID'] = ''
-    
+
+    #JPY登録のものをUSDに直す
+    JPY_TTB = 109 #為替相場
+    for num in range(indexNum):
+        if tcv_csv.at[num, 'Metafield: Currency [string]'] == 'JPY':
+            tcv_csv.at[num, 'Variant Price'] = round(tcv_csv.at[num, 'Variant Price'] / JPY_TTB)
+
+
     #お好きなようにデータ処理ここまで
 
     df_result = tcv_csv #最後にcsvに変換したいデータフレームとして返す
