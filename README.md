@@ -7,3 +7,4 @@
 # django-heroku-ichiroapp
 # django-heroku-ichiroapp
 # ichiro-apps
+# ichiro-apps
