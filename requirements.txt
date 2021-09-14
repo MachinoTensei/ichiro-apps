@@ -1,5 +1,5 @@
 -r requirements-dev.txt
-gunicorn
+gunicorn==20.1.0
 psycopg2
 
 Django~=3.2.7
