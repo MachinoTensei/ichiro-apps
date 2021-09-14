@@ -1,0 +1,16 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+<div class="my-5">
+    <h1>INVOICE一覧</h1>
+
+    {% for invoice in object_list %}
+        {{invoice}}
+        <a href="{% url 'invoice:invoice-pdf-view' invoice.pk %}" target="_blank"><button class="btn btn-primary">pdf表示</button></a>
+        <br>
+        <hr>
+    {% endfor %}
+
+</div>
+
+{% endblock %}

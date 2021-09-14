@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>INVOICE PDF</title>
+        <style type="text/css">
+            @page {
+                size: a4 portrait;
+                @frame content_frame {
+                    left: 50pt;
+                    width: 512pt;
+                    top: 25pt;
+                    height: 800pt;
+                }
+            }
+            p {
+                font-size: 12px;
+                margin: 0;
+                padding: 0;
+            }
+            .title {
+                font-weight: 600;
+                font-size: 25px;
+                text-align: center;
+                margin: 0 0 -30px 0;
+            }
+            .date-wrap {
+                margin-top: -50px;
+            }
+            .no {
+                padding: 0;
+                font-size: 12px;
+            }
+            .no th {
+                width: 600px;
+                text-align: right;
+            }
+            .no td {
+                text-align: left;
+                padding-left: 3px;
+            }
+            .main {
+                margin: 3px 0 10px;
+                width: 50%;
+                background-color: cornflowerblue;
+            }
+            .table {
+                border: solid 0.5px rgb(0, 10, 156);
+                padding: 0;
+            }
+            .table td {
+                padding: 3px 3px 0px;
+                vertical-align: top;
+                font-size: 12px;
+            }
+            .table span {
+                font-weight: 900;
+                font-size: 13px;
+                color: #666;
+            }
+            .p1 {
+                color: red;
+            }
+            .p2 {
+                margin: 0 0 8px;
+            }
+            .item {
+                margin: 0 0 20px;
+            }
+            .itemtable_th1 {
+                width: 50%;
+            }
+            .itemtable_th2 {
+                width: 15%;
+            }
+            .itemtable_th3 {
+                width: 35%;
+            }
+            .itemtable th, .itemtable td {
+                text-align: left;
+                font-size: 12px;
+            }
+            .itemtable1 {
+                border-top: solid 1px rgb(0, 10, 156);
+            }
+            .itemtable1 th {
+                padding: 2px 0 0;
+                color: rgb(0, 10, 156);
+            }
+            .itemtable2 {
+                border-top: solid 2px rgb(0, 10, 156);
+                border-bottom: solid 2px rgb(0, 10, 156);
+            }
+            .itemtable2 td {
+                padding: 2px 0 0;
+            }
+            .itemtable3 td {
+                padding: 2px 0 0;
+                font-weight: 600;
+            }
+            .foot {
+                margin: 0 0 20px;
+            }
+            .foottable td {
+                width: 50%;
+                text-align: left;
+                vertical-align: bottom;
+            }
+            .foottable_td {
+                padding: 30px 0 0 25px;
+            }
+            .foottable_td p {
+                font-weight: 900;
+                color: rgb(0, 10, 156);
+                font-size: 12px;
+                font-style: italic;
+                border-top: solid 1px rgb(0, 10, 156);
+            }
+            .logo {
+                text-align: right;
+            }
+        </style>
+    </head>
+    <body>
+        <p class="title">INVOICE</p>
+        <div class="date-wrap">
+            <table class="no">
+                <tr><th>INVOICE No :</th><td>{{invoice.invoice_number}}</td></tr>
+                <tr><th>DATE :</th><td>{{invoice_Date_month}}{{invoice.date|date:'/j/Y'}}(JST)</td></tr>
+            </table>
+        </div>
+        <div class="main">
+            <table class="table">
+                <tr>
+                    <td rowspan="2"><span>Shipper</span><br>{{invoice.user.site_name}}<br>{{invoice.user.address}}<br>TEL : {{invoice.user.tel}}<br>FAX : {{invoice.user.fax}}</td>
+                    <td><span>Payment Terms</span><br>{{invoice.payment_terms}}</td>
+                </tr>
+                <tr>
+                    <td><span>Payment Due</span><br>{{invoice_PaymentDate_month}}{{invoice.payment_due|date:'/j/Y'}}(JST)</td>
+                </tr>
+                <tr>
+                    <td><span>Consignee</span><br>{{invoice.consignee_name}}<br>{{invoice.consignee_address}}<br>TEL : {{invoice.consignee_tel}}<br>FAX : {{invoice.consignee_fax}}</td>
+                    <td rowspan="2"><span>Bank Account</span><br>{{invoice.bank_account}}</td>
+                </tr>
+                <tr>
+                    <td><span>Notify Party</span><br>Same as Consignee</td>
+                </tr>
+                <tr>
+                    <td><span>Shipped per</span><br>{{invoice.shipped_per}}</td>
+                    <td rowspan="5"><span>Beneficiary's Information</span><br>Name : {{invoice.beneficiary_info_name}}<br>Address : {{invoice.beneficiary_info_address}}<br>TEL : {{invoice.beneficiary_info_tel}}</td>
+                </tr>
+                <tr>
+                    <td><span>On or About</span><br>{{invoice.on_or_about}}</td>
+                </tr>
+                <tr>
+                    <td><span>From</span><br>ALL JAPAN PORT</td>
+                </tr>
+                <tr>
+                    <td><span>To</span><br>{{invoice.to}}</td>
+                </tr>
+                <tr>
+                    <td><span>Final Destination</span><br>{{invoice.final_destination}}</td>
+                </tr>
+            </table>
+        </div>
+        <p class="p1">Please make sure to write down your name and Invoice No ({{invoice.invoice_number}}) to the bank transfer slip. The payment WITHOUT name and Invoice No will NOT be confirmed.</p>
+        <p class="p2">All the payment must be made to {{invoice.user.company}}’s bank account.</p>
+        <div class="item">
+            <table class="itemtable">
+                <tr class="itemtable1">
+                    <th class="itemtable_th1">Item Description</th><th class="itemtable_th2">Quantity</th><th class="itemtable_th3">Amount</th>
+                </tr>
+                <tr class="itemtable2">
+                    <td>{{invoice.item_description | linebreaksbr}}</td><td>1unit</td><td>{{invoice.insurance}}<br><br>US${{invoice.total_price}}</td>
+                </tr>
+                <tr class="itemtable3">
+                    <td>TOTAL</td><td>1unit</td><td>CIF DAR ES SALAAM<br>US$28,750.00</td>
+                </tr>
+            </table>
+        </div>
+        <div class="foot">
+            <table class="foottable">
+                <tr>
+                    <td rowspan="2">
+                        <p>•The buyer must bear any applicable bank charges when depositing the payment.<br>
+                            •The Buyer is kindly requested to arrange for the Marine Insurance on the item on FOB trades. We are not responsible for any damages, losses, incidents, etc, occur on your goods while the voyage.<br>
+                            All the payment must be made to {{invoice.user.company}}’s bank account.</p>
+                    </td>
+                    <td class="foottable_td"><p>Safari Direct Japan</p></td>
+                </tr>
+                <tr>
+                    <td class="foottable_td"><p>YOUR SIGNATURE</p></td>
+                </tr>
+            </table>
+        </div>
+        <p class="logo"><img src="./app/static/logo.jpeg" alt="" height="80px"></p>
+    </body>
+</html>

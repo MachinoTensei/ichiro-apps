@@ -1,0 +1,5 @@
+cd '/Users/tensei/Desktop/ココナラ/松崎澤木カーEC/Django-invoice-csv-app'
+
+source myvenv/bin/activate
+
+python3 manage.py runserver
