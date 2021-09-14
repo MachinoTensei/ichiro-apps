@@ -10,7 +10,7 @@ from django.conf import Settings, settings
 
 #PDF記入モデル
 class Invoice(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.SET_NULL, null=True)
     invoice_number = models.CharField('INVOICE No.', max_length=150)
     date = models.DateField(default=timezone.now)
     consignee_name = models.CharField('名前（Consignee）', max_length=150, blank=True)
