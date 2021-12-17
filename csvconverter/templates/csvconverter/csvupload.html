@@ -3,11 +3,22 @@
 {% block content %}
 
 <div class="my-5">
-    <p>TCVのCSVファイルをShopify形式に変換するWEBアプリ</p>
+    <p>1. TCVのCSVファイルをShopify形式に変換するWEBアプリ</p>
     <form method="POST" class="form" enctype="multipart/form-data">
         {% csrf_token %}
-        <p>ファイルを選択</p>
+        <p><b>ユーザー：「{{ user.get_username }}」で商品登録</b><br><br>ファイルを選択</p>
         {{ form.testfile }}{{ form.title }}
+        <button type="submit" class="save btn btn-outline-primary">Upload and Download</button>
+    </form>
+    <div style="height: 60px;"></div>
+    <!--ここからは更新時の処理に関する記述-->
+    <p>2. 掲載車両更新WEBアプリ</p>
+    <form method="POST" class="form" enctype="multipart/form-data">
+        {% csrf_token %}
+        <p>エクスポートファイル（旧）を選択</p>
+        {{ form2.testfile2_1 }}{{ form2.title }}<br><br>
+        <p>新ファイルを選択</p>
+        {{ form2.testfile2_2 }}{{ form2.title }}
         <button type="submit" class="save btn btn-outline-primary">Upload and Download</button>
     </form>
 </div>
