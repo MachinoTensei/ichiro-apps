@@ -11,7 +11,7 @@ def CsvUploadView(request):
     if request.method == 'POST':
         upload = UploadForm(request.POST, request.FILES)
         if upload.is_valid():
-            data = pd.read_csv(request.FILES['testfile'], encoding="shift-jis", delimiter=',', header=2)
+            data = pd.read_csv(request.FILES['testfile'], encoding="shift-jis", delimiter=',', header=3)
             df = process_file(data)
             df['Metafield: SellerUserName [single_line_text_field]'] = request.user.company #最後の列に1列カラムを追加して、どのユーザーか（会社名）を記入
             response = to_csv(df)

@@ -16,7 +16,6 @@ def process_file(data):
 
     #お好きなようにデータ処理ここから-----------------------------------------------------------------------------------------------------------------------
 
-
     sort_columns = ['ReferenceNo','Handle','CommandType','title','Body HTML','Make','BodyStyle1','Options','Tags Command','Created At','Updated At','Status','Published','Published At','Published Scope','Template Suffix','Gift Card','Row #','Top Row','Custom Collections','ImageFiles','Image Command','Image Position','Image Width','Image Height','Image Alt Text','Variant ID','Variant Command','Option1 Name','Option1 Value','Option2 Name','Option2 Value','Option3 Name','Option3 Value','Variant Generate From Options','Variant Position','Variant SKU','Variant Weight','Variant Weight Unit','Variant HS Code','Variant Country of Origin','Price','Variant Compare At Price','Variant Cost','Variant Requires Shipping','Variant Taxable','Variant Tax Code','Variant Barcode','Variant Image','Variant Inventory Tracker','Variant Inventory Policy','Variant Fulfillment Service','Variant Inventory Qty','Variant Inventory Adjust','YearMonth','Model','GradeTrim','GradeTrimDomestic','Mileage','ModelCode','VINSerialNo','Currency','BodyStyle2','Steering','Transmission','Door','Displacement','Passengers','FuelType','DriveType','ExteriorColor','InteriorColor','Condition','CheckYearMonth','MechanicalProblem','Options','Comments','CommentsDomestic','VehicleWidth','VehicleLength','VehicleHeight','ItemType','Domestic','Overseas','Title','PriceDomestic','PayTrade','MileageOption','Staff','Comment','LayingDate','LayingCost','LayingCostCurrency','LayingSupplier','IsPostedOption']
     #列の並び替え順を指定
     tcv_csv = tcv_csv.reindex(columns=sort_columns) #shopify形式になるように並び替え
@@ -61,6 +60,7 @@ def process_file(data):
     ImageSrcColumns = tcv_csv['Image Src']
     ImageSrcList = []
     for i in ImageSrcColumns:
+        i = str(i)
         i = i.replace('<','').replace('>','; ')
         ImageSrcList.append(i)
 
@@ -90,7 +90,7 @@ def process_file(data):
     
 
     #お好きなようにデータ処理ここまで-----------------------------------------------------------------------------------------------------------------------
-
+    
     df_result = tcv_csv #最後にcsvに変換したいデータフレームとして返す
 
     return df_result
