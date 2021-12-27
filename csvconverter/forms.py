@@ -13,6 +13,8 @@ class UploadForm(forms.Form):
     testfile = forms.FileField(
         #validators=[csv_check],
     )
+    header_line = forms.CharField(
+    )
 
 
 #更新作業用フォーム

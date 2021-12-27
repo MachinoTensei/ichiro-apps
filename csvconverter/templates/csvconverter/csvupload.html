@@ -7,6 +7,7 @@
     <form method="POST" class="form" enctype="multipart/form-data">
         {% csrf_token %}
         <p><b>ユーザー：「{{ user.get_username }}」で商品登録</b><br><br>ファイルを選択</p>
+        ヘッダー位置（upload.csvの場合2, それ以外の場合3）：{{ form.header_line }}<br><br>
         {{ form.testfile }}{{ form.title }}
         <button type="submit" class="save btn btn-outline-primary">Upload and Download</button>
     </form>
