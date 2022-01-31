@@ -140,7 +140,7 @@
                 </tr>
                 <tr>
                     <td><span>Consignee</span><br>{{invoice.consignee_name}}<br>{{invoice.consignee_address}}<br>TEL : {{invoice.consignee_tel}}<br>FAX : {{invoice.consignee_fax}}</td>
-                    <td rowspan="2"><span>Bank Account</span><br>{{invoice.bank_account}}</td>
+                    <td rowspan="2"><span>Bank Account</span><br>{{invoice.bank_account | linebreaksbr}}</td>
                 </tr>
                 <tr>
                     <td><span>Notify Party</span><br>Same as Consignee</td>
@@ -174,7 +174,7 @@
                     <td>{{invoice.item_description | linebreaksbr}}</td><td>1unit</td><td>{{invoice.insurance}}<br><br>US${{invoice.total_price}}</td>
                 </tr>
                 <tr class="itemtable3">
-                    <td>TOTAL</td><td>1unit</td><td>CIF DAR ES SALAAM<br>US$28,750.00</td>
+                    <td>TOTAL</td><td>1unit</td><td>{{invoice.insurance}}<br>US${{invoice.total_price}}</td>
                 </tr>
             </table>
         </div>

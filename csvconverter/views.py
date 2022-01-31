@@ -20,8 +20,8 @@ def CsvUploadView(request):
         
         upload2 = UploadForm2(request.POST, request.FILES)
         if upload2.is_valid():
-            data2_1 = pd.read_csv(request.FILES['testfile2_1'], encoding="")
-            data2_2 = pd.read_csv(request.FILES['testfile2_2'], encoding="")
+            data2_1 = pd.read_csv(request.FILES['testfile2_1'], encoding="", dtype=object)
+            data2_2 = pd.read_csv(request.FILES['testfile2_2'], encoding="", dtype=object)
             df2 = update_file(data2_1, data2_2)
             response2 = to_csv2(df2)
             return response2
