@@ -17,6 +17,7 @@ class Invoice(models.Model):
     consignee_address = models.CharField('住所（Consignee）', max_length=500, blank=True)
     consignee_tel = models.CharField('電話番号（Consignee）', max_length=150, blank=True)
     consignee_fax = models.CharField('FAX（Consignee）', max_length=150, blank=True)
+    Notify_Party = models.CharField('Notify_Party', max_length=150, blank=True)
     shipped_per = models.CharField('Shipped_per', max_length=150, blank=True)
     on_or_about = models.CharField('On or About', max_length=150, blank=True)
     to = models.CharField('To', max_length=150, blank=True)
